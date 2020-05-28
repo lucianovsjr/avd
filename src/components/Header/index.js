@@ -8,10 +8,10 @@ export default function Headers() {
   return (
       <NavHeader>
         <NavHeader.Brand href="#home">
-          <FaHome size={32} color="#4CAF50" />
+          <FaHome size={32} color="#1ab394" />
         </NavHeader.Brand>
         <Nav className="mr-auto">
-          <Link> PAINEL </Link>
+          <Nav.Item><Link>PAINEL</Link></Nav.Item>          
         </Nav>
         <NavHeader.Text>Fulano da Silva</NavHeader.Text>
         <Link><FaSignInAlt size={28} /></Link>

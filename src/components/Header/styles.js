@@ -9,7 +9,7 @@ export const NavHeader = styled(Navbar).attrs({
   margin-bottom: 10px;
 
   svg { 
-    color: #4CAF50;
+    color: #1ab394;
     /* centralizar img */
     display: block;
     margin: 0 auto;
