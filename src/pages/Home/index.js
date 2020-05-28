@@ -93,7 +93,7 @@ export default class Home extends Component {
     cards: [
       {
         active: true,
-        title: 'Avaliações abertas',
+        title: 'Abertas',
         icon: 'FaUserAlt',
         total: 14,
       },

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Navbar, Nav } from 'react-bootstrap';
+import { Navbar, Nav, Form } from 'react-bootstrap';
 
 export const NavHeader = styled(Navbar).attrs({
   expand: 'md',
@@ -24,4 +24,18 @@ export const Link = styled(Nav.Link)`
   text-align: center;
   padding-top: 0px;
   padding-bottom: 0px;
+`;
+
+export const FormYear = styled(Form.Group)`
+  margin-bottom: 0;
+
+  .custom-select { 
+    &:focus {
+      outline: none;
+      box-shadow: none;
+    }    
+  }   
+`;
+
+export const Option = styled.option`
 `;
