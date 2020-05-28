@@ -99,7 +99,13 @@ export default class Home extends Component {
       },
       {
         active: false,
-        title: 'Reprovados',
+        title: 'Aprovar',
+        icon: 'FaUserEdit',
+        total: 0,
+      },
+      {
+        active: false,
+        title: 'Reprovadas',
         icon: 'FaUserTimes',
         total: 1,
       },
@@ -108,13 +114,7 @@ export default class Home extends Component {
         title: 'Em aprovação',
         icon: 'FaUserClock',
         total: 3,
-      },
-      {
-        active: false,
-        title: 'Avaliar',
-        icon: 'FaUserEdit',
-        total: 0,
-      },
+      },      
       {
         active: false,
         title: 'Finalizadas',

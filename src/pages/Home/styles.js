@@ -4,7 +4,7 @@ import { Card, Table, Pagination } from 'react-bootstrap';
 export const CardHome = styled(Card)`
   ${props => (
    props.active &&
-    'background-color: #1ab394; color: white;'
+    'background-color: #1ab394; color: #fff;'
   )}  
   
   &:hover {
@@ -14,7 +14,7 @@ export const CardHome = styled(Card)`
   svg { 
     ${props => (
       props.active ?
-      'color: #white;'
+      'color: white;'
       : 'color: #1ab394;'
     )}    
     margin: 0 40px 0 20px;
