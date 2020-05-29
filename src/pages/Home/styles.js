@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Card, Table, Pagination } from 'react-bootstrap';
+import { Card, Table, Pagination, Spinner } from 'react-bootstrap';
 
 export const CardHome = styled(Card)`
   ${props => (
@@ -35,4 +35,13 @@ export const PaginationHome = styled(Pagination)`
     background-color: #1ab394;
     border-color: #1ab394;
   }
+`;
+
+export const Loading = styled(Spinner).attrs({
+  animation: 'border',
+})`
+  margin-top: 80px;  
+  width: 100px;
+  height: 100px;
+  color: #1ab394;
 `;

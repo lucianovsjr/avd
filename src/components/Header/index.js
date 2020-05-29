@@ -15,7 +15,7 @@ export default function Headers() {
           <Nav.Item><Link>PAINEL</Link></Nav.Item>          
         </Nav>
         
-        <div class="ml-auto">
+        <div className="ml-auto">
           <InputGroup>
             <InputGroup.Prepend>
               <InputGroup.Text>

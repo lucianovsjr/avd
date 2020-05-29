@@ -1,0 +1,39 @@
+{
+  "avaliacoes_abertas": [
+    {
+      "id": 1,
+      "name": "João da Silva",
+      "departamento": "Informática",
+      "cargo": "Técnico"
+    },
+    {
+      "id": 2,
+      "name": "Fulano Pereira",
+      "departamento": "Informática",
+      "cargo": "Analista"
+    },
+    {
+      "id": 3,
+      "name": "Fulano Braga",
+      "departamento": "Financeiro",
+      "cargo": "Analista"
+    },
+    {
+      "id": 4,
+      "name": "Ciclano Vieira",
+      "departamento": "Financeiro",
+      "cargo": "Analista"
+    }
+  ],
+  "avaliacoes_aprovar": [],
+  "avaliacoes_reprovadas": [
+    {
+      "id": 1,
+      "name": "Marcos da Silva",
+      "departamento": "Fiscal",
+      "cargo": "Auxiliar"
+    }
+  ],
+  "avaliacoes_em_aprovacao": [],
+  "avaliacoes_finalizadas": []
+}
