@@ -24,6 +24,20 @@ export const CardHome = styled(Card)`
 export const TableHome = styled(Table)`
   background: white;
   margin-top: 10px;
+
+  .column-edit {
+    width: 70px;
+  }
+
+  svg {
+    display: block;
+    margin: auto;
+    color: #1ab394;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 `;
 
 export const PaginationHome = styled(Pagination)`
