@@ -7,12 +7,14 @@ import { NavHeader, Link, FormYear } from './styles';
 export default function Headers() { 
   return (
       <NavHeader>
-        <NavHeader.Brand href="/" className="col-auto">
-          <FaHome size={32} color="#1ab394" />
+        <NavHeader.Brand className="col-auto">
+          <Link to="/">
+            <FaHome size={32} color="#1ab394" />
+          </Link>
         </NavHeader.Brand>
 
         <Nav className="col-auto mr-auto">
-          <Nav.Item><Link href="/configurador">CONFIGURADOR</Link></Nav.Item>          
+          <Nav.Item><Link to="/configurador">CONFIGURADOR</Link></Nav.Item>          
         </Nav>
         
         <div className="ml-auto">

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import { Navbar, Nav, Form } from 'react-bootstrap';
+import { Navbar, Form } from 'react-bootstrap';
+import { Link as LinkRouter } from 'react-router-dom';
 
 export const NavHeader = styled(Navbar).attrs({
   expand: 'md',
@@ -16,14 +17,19 @@ export const NavHeader = styled(Navbar).attrs({
   }
 `;
 
-export const Link = styled(Nav.Link)`
+export const Link = styled(LinkRouter)`
   text-decoration: none;
-  color: black;
+  color: rgba(0,0,0,.5);
   display: flex;
   flex-direction: column;
   text-align: center;
   padding-top: 0px;
   padding-bottom: 0px;
+
+  &:hover {
+    color: black;
+    text-decoration: none;
+  }
 `;
 
 export const FormYear = styled(Form.Group)`
