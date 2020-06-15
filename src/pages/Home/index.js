@@ -1,143 +1,120 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Container } from 'react-bootstrap';
-import produce from 'immer';
+import { useImmer } from 'use-immer';
 
 import api from '../../services/api';
 import { Loading } from './styles'
 import Cards from './Cards';
 import List from './List';
 
-export default class Home extends Component {
-  state = {
-    loading: true,
-    cards: [
-      {
-        id: 0,
-        active: false,
-        title: 'Abertas',
-        icon: 'FaUserAlt',
-        total: 0,
-        avaliacoes: [],
-        funcSelect: () => this.handleSelectCard(0),
-      },
-      {
-        id: 1,
-        active: false,
-        title: 'Aprovar',
-        icon: 'FaUserEdit',
-        total: 0,
-        avaliacoes: [],
-        funcSelect: () => this.handleSelectCard(1),
-      },
-      {
-        id: 2,
-        active: false,
-        title: 'Reprovadas',
-        icon: 'FaUserTimes',
-        total: 0,
-        avaliacoes: [],
-        funcSelect: () => this.handleSelectCard(2),
-      },
-      {
-        id: 3,
-        active: false,
-        title: 'Em aprovação',
-        icon: 'FaUserClock',
-        total: 0,
-        avaliacoes: [],
-        funcSelect: () => this.handleSelectCard(3),
-      },      
-      {
-        id: 4,
-        active: false,
-        title: 'Finalizadas',
-        icon: 'FaUserCheck',
-        total: 0,
-        avaliacoes: [],
-        funcSelect: () => this.handleSelectCard(4),
-      }
-    ],
-  };
+export default function Home() {
+  const [loading, setLoading] = useState(false);
+  const [cards, updateCards] = useImmer([
+    {
+      id: 0,
+      active: true,
+      title: 'Abertas',
+      icon: 'FaUserAlt',
+      total: 0,
+      avaliacoes: [],
+      funcSelect: () => handleSelectCard(0),
+    },
+    {
+      id: 1,
+      active: false,
+      title: 'Aprovar',
+      icon: 'FaUserEdit',
+      total: 0,
+      avaliacoes: [],
+      funcSelect: () => handleSelectCard(1),
+    },
+    {
+      id: 2,
+      active: false,
+      title: 'Reprovadas',
+      icon: 'FaUserTimes',
+      total: 0,
+      avaliacoes: [],
+      funcSelect: () => handleSelectCard(2),
+    },
+    {
+      id: 3,
+      active: false,
+      title: 'Em aprovação',
+      icon: 'FaUserClock',
+      total: 0,
+      avaliacoes: [],
+      funcSelect: () => handleSelectCard(3),
+    },
+    {
+      id: 4,
+      active: false,
+      title: 'Finalizadas',
+      icon: 'FaUserCheck',
+      total: 0,
+      avaliacoes: [],
+      funcSelect: () => handleSelectCard(4),
+    }
+  ]);
 
-  async componentDidMount() {
-    const [respAbertas, respAprovar, respRepovadas, respEmAprovacao, respFinalizadas] = await Promise.all([
-      api.get('/avaliacoes_abertas/'),
-      api.get('/avaliacoes_aprovar/'),
-      api.get('/avaliacoes_reprovadas/'),
-      api.get('/avaliacoes_em_aprovacao/'),
-      api.get('/avaliacoes_finalizadas/')
-    ]);
+  const cardCurrent = useMemo(() => cards.filter(card => card.active === true), [cards]);
+  const avaliacaoCurrent = useMemo(() => cardCurrent.length > 0 ? cardCurrent[0].avaliacoes : [], [cardCurrent]);
 
-    this.setState({
-      cards: produce(this.state.cards, draftState => {
-        let total = 0;
-
-        draftState.map(card => {
-          switch(card.id) {
-            case 0:
-              card.total = respAbertas.data.length;
-              card.avaliacoes = respAbertas.data;
-              break;
-            case 1:
-              card.total = respAprovar.data.length;
-              card.avaliacoes = respAprovar.data;
-              break;
-            case 2:
-              card.total = respRepovadas.data.length;
-              card.avaliacoes = respRepovadas.data;
-              break;
-            case 3:
-              card.total = respEmAprovacao.data.length;
-              card.avaliacoes = respEmAprovacao.data;
-              break;
-            case 4:
-              card.total = respFinalizadas.data.length;
-              card.avaliacoes = respFinalizadas.data;
-              break;
-            default:              
-              card.total = 0;
-              card.avaliacoes = [];
-          }
-          
-          // Exibir o total
-          if (card.total > total) {
-            card.active = true;
-            total = card.total;
-          }
-
-          return card;
-        })
-      }),       
-      loading: false,
-    });
-  }
-
-  handleSelectCard(id) {
-    this.setState({
-      cards: produce(this.state.cards, draftState => {
-        draftState.map(card => {
-          card.active = card.id === id ? true : false
-
-          return card;
-        });
-      }),
-    });
-  }
-
-  render()  {
-    const { cards, loading } = this.state;
-
-    const cardCurrent = cards.filter(card => card.active === true);
-    const avaliacoes = cardCurrent.length > 0 ? cardCurrent[0].avaliacoes :[];
-
-    return (
-      <Container fluid="md">
-        <Cards cards={cards}/>
-        { loading
-          ? <div class="d-flex justify-content-center"><Loading /></div>
-          : <List avaliacoes={avaliacoes}/>
-        }
-      </Container>
+  function updateCard(id, total, data) {
+    updateCards(draft =>
+      draft.map(
+        card => card.id === id
+        ? {...card, total: total, avaliacoes: data}
+        : card
+      )
     );
-  }  
+  }
+
+  function updateCardActive(id) {
+    updateCards(draft =>
+      draft.map(
+        card => card.id === id
+        ? {...card, active: true}
+        : {...card, active: false}
+      )
+    );
+  }
+
+  useEffect(() => {
+    async function loadCards() {
+      setLoading(true);
+
+      const [respAbertas, respAprovar, respRepovadas, respEmAprovacao, respFinalizadas] = await Promise.all([
+        api.get('/avaliacoes_abertas/'),
+        api.get('/avaliacoes_aprovar/'),
+        api.get('/avaliacoes_reprovadas/'),
+        api.get('/avaliacoes_em_aprovacao/'),
+        api.get('/avaliacoes_finalizadas/')
+      ]);
+
+      updateCard(0, respAbertas.data.length, respAbertas.data);
+      updateCard(1, respAprovar.data.length, respAprovar.data);
+      updateCard(2, respRepovadas.data.length, respRepovadas.data);
+      updateCard(3, respEmAprovacao.data.length, respEmAprovacao.data);
+      updateCard(4, respFinalizadas.data.length, respFinalizadas.data);
+
+      setLoading(false);
+    }
+
+    loadCards();
+  }, []);
+
+  function handleSelectCard(id) {
+    updateCardActive(id)
+  }
+
+  return (
+    <Container fluid="md">
+      <Cards cards={cards}/>
+      { loading
+        ? <div className="d-flex justify-content-center"><Loading /></div>
+        : <List avaliacoes={avaliacaoCurrent}/>
+      }
+    </Container>
+  );
 }

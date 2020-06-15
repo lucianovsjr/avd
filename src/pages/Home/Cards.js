@@ -13,7 +13,7 @@ function CardIcon({ icon }) {
       return <FaUserTimes size={32} />;
     case 'FaUserClock':
       return <FaUserClock size={32} />;
-    case 'FaUserEdit':      
+    case 'FaUserEdit':
       return <FaUserEdit size={32} />;
     case 'FaUserCheck':
       return <FaUserCheck size={32} />;
@@ -28,14 +28,14 @@ export default function Cards({ cards }) {
       { cards.map(card => (
         <CardHome key={card.title} active={card.active} onClick={card.funcSelect}>
           <CardHome.Body>
-            <CardHome.Title>{card.title}</CardHome.Title>            
+            <CardHome.Title>{card.title}</CardHome.Title>
             <CardHome.Text>
               <CardIcon icon={card.icon}/>
               <span>{card.total}</span>
             </CardHome.Text>
           </CardHome.Body>
         </CardHome>
-      )) }      
+      )) }
     </CardGroup>
   );
 }
