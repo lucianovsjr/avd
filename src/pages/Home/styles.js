@@ -5,18 +5,18 @@ export const CardHome = styled(Card)`
   ${props => (
    props.active &&
     'background-color: #1ab394; color: #fff;'
-  )}  
-  
+  )}
+
   &:hover {
     cursor: pointer;
   }
 
-  svg { 
+  svg {
     ${props => (
       props.active ?
       'color: white;'
       : 'color: #1ab394;'
-    )}    
+    )}
     margin: 0 40px 0 20px;
   }
 `;
@@ -54,7 +54,7 @@ export const PaginationHome = styled(Pagination)`
 export const Loading = styled(Spinner).attrs({
   animation: 'border',
 })`
-  margin-top: 80px;  
+  margin-top: 80px;
   width: 100px;
   height: 100px;
   color: #1ab394;
