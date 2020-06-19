@@ -10,6 +10,7 @@ import {
   ButtonHistorico,
   Header,
   HeaderColaborador,
+  Separator,
   HeaderButtons,
   FormAvaliacao,
   TableAvaliacao,
@@ -51,10 +52,28 @@ function Avaliacao({history, match}) {
   return (
     <Container fluid="md">
       <Header>
+        <FormTooltip text="Voltar">
+          <ButtonGoBack onClick={() => history.goBack()} />
+        </FormTooltip>
+
+        <Separator />
+
+        <HeaderColaborador>
+          <span className="nome">{avaliacao.name}</span>
+          <span className="departamento">{avaliacao.departamento}</span>
+          <span className="cargo">{avaliacao.cargo}</span>
+        </HeaderColaborador>
+
+        <Separator />
+
+        <HeaderColaborador>
+          <span className="nome">Alexandre Lucio dos Santos</span>
+          <span className="nome">Werisson</span>
+        </HeaderColaborador>
+
+        <Separator />
+
         <HeaderButtons>
-          <FormTooltip text="Voltar">
-            <ButtonGoBack onClick={() => history.goBack()} />
-          </FormTooltip>
           <FormTooltip text="Salvar">
             <ButtonSave />
           </FormTooltip>
@@ -65,17 +84,6 @@ function Avaliacao({history, match}) {
             <ButtonHistorico />
           </FormTooltip>
         </HeaderButtons>
-
-        <HeaderColaborador>
-          <span className="nome">{avaliacao.name}</span>
-          <span className="departamento">{avaliacao.departamento}</span>
-          <span className="cargo">{avaliacao.cargo}</span>
-        </HeaderColaborador>
-
-        <HeaderColaborador>
-          <span className="nome">Alexandre Lucio dos Santos</span>
-          <span className="nome">Werisson</span>
-        </HeaderColaborador>
       </Header>
       <div>
         <FormAvaliacao>

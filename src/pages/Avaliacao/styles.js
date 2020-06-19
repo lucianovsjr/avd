@@ -13,20 +13,28 @@ export const Header = styled.div`
   flex-direction: row;
 `;
 
-export const HeaderButtons = styled.div`
-  display: inline;
-  /*margin: auto 40px auto 0;*/
-  margin: auto auto auto 25px;
-`;
-
 export const ButtonGoBack = styled(FaReply).attrs({
   size: 35,
 })`
+  display: inline-block;
+  width: 80px;
+  margin: auto auto auto 0;
   color: #1ab394;
 
   &:hover {
     cursor: pointer;
   }
+`;
+
+export const Separator = styled.div`
+  height: 100%;
+  width: 1px;
+  background-color: rgba(0,0,0,.125);
+`;
+
+export const HeaderButtons = styled.div`
+  display: inline;
+  margin: auto auto auto auto;
 `;
 
 export const ButtonSave = styled(FaSave).attrs({
@@ -67,10 +75,9 @@ export const HeaderColaborador = styled.div`
   display: flex;
   flex-direction: column;
 
-  width: 350px;
+  width: 325px;
   padding: 0 20px;
   margin: auto 0;
-  border-left: 1px solid rgba(0,0,0,.125);
 
   .nome {
     font-size: 18px;
